@@ -37,12 +37,14 @@ public class UserDao {
 			String sql = "SELECT * FROM TB_USER WHERE USER_ID = ?";
 			
 			// PreparedStatement 객체 생성
+			// ?에 값 대입 객체 생성
 			pstmt = conn.prepareStatement(sql);
 			
 			// ?(placeholder)에 알맞은 값 대입
 			pstmt.setString(1, input);
 			
-			// SQL 수행 후 결과 반환 받기
+			// SQL 수행 후 결과 반환 받아서
+			// ResultSet에 대입
 			rs = pstmt.executeQuery();
 			
 			// 조회 결과가 있을 경우
