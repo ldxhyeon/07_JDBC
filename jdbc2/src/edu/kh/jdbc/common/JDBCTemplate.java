@@ -90,7 +90,7 @@ public class JDBCTemplate {
 			// 만들어진 Connection에 AutoCommit 끄기
 			String url = prop.getProperty("url");
 			String userName = prop.getProperty("userName");
-			String password = prop.getProperty("passowrd");
+			String password = prop.getProperty("password");
 			
 			conn = DriverManager.getConnection(url, userName, password);
 			
