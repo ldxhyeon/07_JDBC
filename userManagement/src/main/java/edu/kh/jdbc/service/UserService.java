@@ -1,5 +1,8 @@
 package edu.kh.jdbc.service;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import edu.kh.jdbc.dto.User;
 
 public interface UserService {
@@ -27,6 +30,9 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	User login(String userId, String userPw) throws Exception;
+
+
+	List<User> selectAll() throws SQLException;
 	
 	
 	

@@ -1,6 +1,8 @@
 package edu.kh.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 import edu.kh.jdbc.dto.User;
 
@@ -30,6 +32,8 @@ public interface UserDao {
 	 * @throws Exception
 	 */
 	User login(Connection conn, String userId, String userPw) throws Exception;
+
+	List<User> selectAll(Connection conn) throws SQLException;
 	
 	
 	
