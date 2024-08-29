@@ -42,6 +42,8 @@ public class IdCheckServlet extends HttpServlet{
 			// 클라이언트와 연결된 출력용 스트림 얻어오기
 			PrintWriter out = resp.getWriter();
 			out.print(result);
+			
+			// test
 	
 		}catch(Exception e) {
 			e.printStackTrace();
