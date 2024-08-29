@@ -14,7 +14,7 @@ import edu.kh.jdbc.dto.User;
 
 public class PracticeDao {
 	
-	
+	//test
 	// 쿼리작성
 	private Statement stmt = null;
 	// ? 쿼리 작성
