@@ -43,7 +43,6 @@ public class IdCheckServlet extends HttpServlet{
 			PrintWriter out = resp.getWriter();
 			out.print(result);
 			
-			// test
 	
 		}catch(Exception e) {
 			e.printStackTrace();
