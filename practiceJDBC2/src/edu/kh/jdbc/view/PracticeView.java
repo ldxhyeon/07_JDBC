@@ -37,14 +37,14 @@ public class PracticeView {
 				sc.nextLine(); // 버퍼에 남은 개행문자 제거
 				
 				switch(input) {
-				case 1 : insertUser(); 		break;
-				case 2 : selectAll();			break;
-				case 3 : 			break;
-				case 4 : 	 		break;
-				case 5 :  			break;
-				case 6 : 			break;
-				case 7 : 			break;
-				case 8 : 		break;
+				case 1 : insertUser(); 			break;
+				case 2 : selectAll();				break;
+				case 3 : searchUserName();	break;
+				case 4 : selectUserNo(); 		break;
+				case 5 : UserNoDelete(); 		break;
+				case 6 : updateName();			break;
+				case 7 : 										break;
+				case 8 : 										break;
 				case 0 : System.out.println("\n[프로그램 종료]\n"); break;
 				default : System.out.println("\n[메뉴 번호만 입력하세요]\n");
 				}
@@ -117,6 +117,100 @@ public class PracticeView {
 		for(User user : userList ) {
 			System.out.println(user);
 		}
+		
+	}
+	
+	
+	
+	private void searchUserName() throws SQLException {
+		
+		System.out.println("\n=== 3.User 중 이름에 검색어가 포함된 회원 조회(SELECT) ===\n");
+		
+		System.out.println("검색할 이름을 입력해주세요.");
+		String searchName = sc.nextLine();
+		
+		List<User> searchList = service.searchUserName(searchName);
+		
+		
+		if(searchList.isEmpty()) {
+			System.out.println("조회된 결과가 없습니다.");
+		}
+		
+		for(User user : searchList) {
+			System.out.println(user);
+		}
+		
+		
+	}
+	
+	
+	private void selectUserNo() throws SQLException {
+		
+		System.out.println("\n=== 4.USER_NO 번호를 입력 받아 일치하는 User 조회(SELECT) ===\n");
+		
+		System.out.println("회원 번호를 입력해주세요.");
+		int userNo = sc.nextInt();
+		
+		
+		User user = service.selectUserNo(userNo);
+		
+		if(user == null) {
+			System.out.println("조회되는 회원이 없습니다.");
+		}
+		
+		System.out.println(user);
+		
+	}
+	
+	
+	private void UserNoDelete() throws SQLException {
+		
+		System.out.println("\n=== 5. USER_NO 번호를 입력 받아 일치하는 User 삭제(DELETE) ===\n");
+		
+		System.out.println("회원 번호를 입력해주세요.");
+		int userNo = sc.nextInt();
+		
+		int result = service.userNoDelete(userNo);
+		
+		if(result > 0) {
+			System.out.println("삭제 되었습니다.");
+		}else {
+			System.out.println("삭제 실패.");
+		}
+	}
+	
+	
+	private void updateName() throws SQLException {
+		System.out.println("\n=== 6. ID, PW가 일치하는 회원이 있을 경우 이름 수정(UPDATE) ===\n");
+		
+		System.out.println("아이디를 입력해주세요.");
+		String userid = sc.nextLine();
+		
+		System.out.println("비밀번호를 입력해주세요.");
+		String userPw = sc.nextLine();
+		
+		int userNo = service.selectUserNo(userid, userPw);
+		
+		if(userNo == 0) {
+			System.out.println("아이디 비밀번호 일치하는 사용자가 없습니다.");
+		}
+		
+		System.out.println("수정할 이름 입력 : ");
+		String updateName = sc.nextLine();
+		
+		int result = service.updateName(updateName, userNo);
+		
+		
+		if(result > 0) {
+			System.out.println("수정 성공");
+		}else {
+			System.out.println("수정 실패");
+		}
+		
+		
+		
+		
+		
 		
 	}
 	

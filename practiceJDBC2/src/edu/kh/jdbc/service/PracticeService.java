@@ -9,6 +9,7 @@ import static edu.kh.jdbc.common.PracticeTemplate.*;
 import edu.kh.jdbc.common.PracticeTemplate;
 import edu.kh.jdbc.dao.PracticeDao;
 import edu.kh.jdbc.dto.User;
+import oracle.jdbc.replay.ConnectionInitializationCallback;
 
 public class PracticeService {
 
@@ -48,6 +49,70 @@ public class PracticeService {
 		close(conn);
 		
 		return user;
+	}
+	
+	
+
+
+	public List<User> searchUserName(String searchName) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		List<User> userList = dao.searchUserName(conn, searchName);
+		
+		close(conn);
+		
+		return userList;
+	}
+
+
+	public User selectUserNo(int userNo) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		User user = dao.selectUserNo(conn, userNo);
+		
+		close(conn);
+		
+		return user;
+	}
+
+
+	public int userNoDelete(int userNo) throws SQLException {
+		
+		int result = 0;;
+		
+		Connection conn = getConnection();
+		
+		result = dao.userNoDelete(conn, userNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int selectUserNo(String userid, String userPw) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		int userNo = dao.selectUser(conn, userid, userPw);
+		
+		close(conn);
+		
+		return userNo;
+	}
+
+
+	public int updateName(String updateName, int userNo) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updateName(conn, updateName, userNo);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

@@ -74,7 +74,7 @@ public class PracticeDao {
 						FROM
 							TB_USER
 						ORDER BY
-							USER_NO ASC
+							1
 					""";
 			
 			// 데이터베이스에 SQL 명령을 전달
@@ -103,5 +103,233 @@ public class PracticeDao {
 		}
 		return list;
 	}
+	
+	
+	
+
+
+	public List<User> searchUserName(Connection conn, String searchName) throws SQLException {
+		
+		List<User> userList = new ArrayList<User>();
+		
+		try {
+			
+			String sql = """
+					SELECT
+						USER_NO,
+						USER_ID,
+						USER_PW,
+						USER_NAME,
+						TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일"')ENROLL_DATE
+					FROM
+						TB_USER
+					WHERE
+						 USER_NAME LIKE '%' || ? || '%'
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchName);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int userNo = rs.getInt("USER_NO");
+				String userId  = rs.getString("USER_ID");
+				String userPw  = rs.getString("USER_PW");
+				String userName  = rs.getString("USER_NAME");
+				String enrollDate  = rs.getString("ENROLL_DATE");
+				
+		
+				User user = new User(userNo, userId, userPw, userName, enrollDate);
+				
+				userList.add(user);
+			}
+			
+			
+			
+			
+		} finally {
+				close(pstmt);
+				close(rs);
+		}
+		
+		
+		
+		
+		return userList;
+	}
+	
+	
+	
+	
+
+
+	public User selectUserNo(Connection conn, int userNo) throws SQLException {
+		
+		User user = null;
+		
+		try {
+			
+			String sql = """
+					SELECT
+						USER_NO,
+						USER_ID,
+						USER_PW,
+						USER_NAME,
+						TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일"')ENROLL_DATE
+					FROM
+						TB_USER
+					WHERE
+						 USER_NO = ?
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String userId  = rs.getString("USER_ID");
+				String userPw  = rs.getString("USER_PW");
+				String userName  = rs.getString("USER_NAME");
+				String enrollDate  = rs.getString("ENROLL_DATE");
+				
+		
+				user = new User(userNo, userId, userPw, userName, enrollDate);
+				
+			}
+			
+			
+			
+			
+		} finally {
+				close(pstmt);
+				close(rs);
+		}
+		
+		
+		return user;
+	}
+
+	
+	
+	
+	
+	
+
+	public int userNoDelete(Connection conn, int userNo) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = """
+					DELETE
+					FROM
+						TB_USER
+					WHERE
+						USER_NO = ?
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} finally {
+				close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public int selectUser(Connection conn, String userid, String userPw) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = """
+					SELECT
+						USER_NO
+					FROM
+						TB_USER
+					WHERE
+						USER_ID = ?
+						AND
+						USER_PW = ?
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			pstmt.setString(2, userPw);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("USER_NO");
+			}
+			
+			
+		} finally {
+				close(pstmt);
+				close(rs);
+		}
+		
+		
+		return result;
+	}
+
+	
+	
+	
+	
+
+	public int updateName(Connection conn, String updateName, int userNo) throws SQLException {
+		
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = """
+					UPDATE
+						TB_USER
+					SET
+						USER_NAME = ?
+					WHERE
+						USER_NO = ?
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, updateName);
+			pstmt.setInt(2, userNo);
+			
+			// 쿼리 실행 후 영향을 받은 행의 수
+			result = pstmt.executeUpdate();
+			
+		} finally {
+				close(pstmt);
+				close(rs);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 
 }
+	
