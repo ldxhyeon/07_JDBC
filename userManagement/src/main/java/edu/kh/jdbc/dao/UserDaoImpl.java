@@ -297,6 +297,7 @@ public class UserDaoImpl implements UserDao{
 	
 	@Override
 	public int updateUser(Connection conn, User user) throws Exception {
+		
 		int result = 0;
 		
 		try {
@@ -313,6 +314,8 @@ public class UserDaoImpl implements UserDao{
 		} finally {
 			close(pstmt);
 		}
+		
+		
 		return result;
 	}
 	

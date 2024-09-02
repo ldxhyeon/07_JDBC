@@ -38,13 +38,13 @@ public class PracticeView {
 				
 				switch(input) {
 				case 1 : insertUser(); 			break;
-				case 2 : selectAll();				break;
-				case 3 : searchUserName();	break;
+				case 2 : selectAll();			break;
+				case 3 : searchUserName();		break;
 				case 4 : selectUserNo(); 		break;
 				case 5 : UserNoDelete(); 		break;
 				case 6 : updateName();			break;
-				case 7 : 										break;
-				case 8 : 										break;
+				case 7 : insertUser2();			break;
+				case 8 : multiInsertUser();		break;
 				case 0 : System.out.println("\n[프로그램 종료]\n"); break;
 				default : System.out.println("\n[메뉴 번호만 입력하세요]\n");
 				}
@@ -207,10 +207,58 @@ public class PracticeView {
 			System.out.println("수정 실패");
 		}
 		
+	}
+	
+	
+	
+	private void insertUser2() throws SQLException {
 		
+		System.out.println("\n=== 7. User 등록(아이디 중복 검사) ===\n");
 		
+		System.out.println("아이디를 입력해주세요.");
+		String userId = sc.nextLine();
 		
+		int count = service.idCheck(userId);
 		
+		if(count == 0) {
+			System.out.println("사용할 수 있는 아이디입니다.\n");
+		}else {
+			System.out.println("이미 가입된 아이디 입니다.");
+			return;
+		}
+			
+		
+		System.out.println("비밀번호를 입력해주세요 :");
+		String userPw = sc.nextLine();
+		
+		System.out.println("닉네임을 입력해주세요 :");
+		String userName = sc.nextLine();
+		
+		User user = new User();
+		user.setUserId(userId);
+		user.setUserPw(userPw);
+		user.setUserName(userName);
+		
+		boolean result = service.insertUser(user);
+		
+
+		if(result) {
+			System.out.println("\n" + userId + "사용자가 등록 되었습니다.\n");
+		}else {
+			System.out.println("\n** 등록 실패 **\n");
+		}
+
+	}
+	
+	
+	private void multiInsertUser() {
+		
+		System.out.println("\n=== 8. 여러 User 등록하기 ===\n");
+		
+		System.out.println("등록할 User 수 :");
+		int input = sc.nextInt();
+		
+		List<User> userList = new ArrayList<User>();
 		
 	}
 	

@@ -478,8 +478,6 @@ public class UserDao {
 					
 			if(rs.next()) { // COUNT 그룹 함수 결과 1행만 조회
 				count = rs.getInt(1); // 조회된 컬럼 순서를 이용해
-						//              
-				
 			}
 			
 		} finally {

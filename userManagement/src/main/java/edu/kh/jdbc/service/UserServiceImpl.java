@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService{
 	// 필드
 	private UserDao dao = new UserDaoImpl();
 	
-
 	@Override
 	public int insertUser(User user) throws Exception {
 		

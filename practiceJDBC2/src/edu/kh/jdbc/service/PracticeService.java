@@ -115,4 +115,16 @@ public class PracticeService {
 		return result;
 	}
 
+
+	public int idCheck(String userId) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.idCheck(conn, userId);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

@@ -325,6 +325,46 @@ public class PracticeDao {
 		
 		return result;
 	}
+
+
+	public int idCheck(Connection conn, String userId) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = """
+					SELECT
+						COUNT(*)
+					FROM
+						TB_USER
+					WHERE
+						USER_ID = ?
+				""";
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+
+			// rs객체 반환
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			
+			
+		} finally {
+				close(pstmt);
+				close(rs);
+		}
+		
+		
+		
+		
+		return result;
+	}
 	
 	
 	
