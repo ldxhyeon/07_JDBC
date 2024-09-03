@@ -60,7 +60,7 @@
             (쿼리스트트링 이용 : 주소?K=V&K=V&....)
            --%>
           <td>
-            <a href="/todo/detail?index=${vs.index}"> ${todo.title}</a>
+            <a href="/todo/detail?index=${vs.index + 1}"> ${todo.title}</a>
           </td>
 
           <%-- 완료 여부 --%>

@@ -29,7 +29,7 @@
   </div>
 
   <div>
-    작성일 : ${todo.regDate}
+    작성일 : ${todo.enrollDate}
   </div>
 
   <div class="content">${todo.detail}</div>

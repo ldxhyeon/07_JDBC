@@ -28,7 +28,6 @@ public class TodoListServiceImpl implements TodoListService{
 		
 		List<Todo> todoList = (List<Todo>)map.get("todoList");
 		
-		
 		close(conn);
 		
 		return map;
@@ -54,6 +53,8 @@ public class TodoListServiceImpl implements TodoListService{
 		Connection conn = getConnection();
 		
 		Todo todo = dao.todoDetailView(conn, index);
+		
+		close(conn);
 		
 		return todo;
 	}

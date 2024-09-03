@@ -24,7 +24,7 @@
 	<entry key="todoAdd">
 		INSERT INTO 
 			TD_LIST
-		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, 'Y', DEFAULT)
+		VALUES(SEQ_LIST_NO.NEXTVAL, ?, ?, 'Y', DEFAULT)
 	</entry>
 	
 	
@@ -38,6 +38,8 @@
 				ENROLL_DATE
 		FROM
 			 TD_LIST
+		WHERE
+			LIST_NO = ?
 	 </entry>
 	 
 	 

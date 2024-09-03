@@ -147,9 +147,11 @@ public class TodoListDaoImpl implements TodoListDao {
 		
 		try {
 			
+			
 			String sql = prop.getProperty("todoDetailView");
 			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, index);
 			
 			rs = pstmt.executeQuery();
 					
@@ -160,7 +162,7 @@ public class TodoListDaoImpl implements TodoListDao {
 				boolean complete  = rs.getBoolean("LIST_COMPLETE");
 				String enrollDate  = rs.getString("ENROLL_DATE");
 			
-				Todo user = new Todo(workNo, title, detail, complete, enrollDate);
+				todo = new Todo(workNo, title, detail, complete, enrollDate);
 			}
 			
 			
