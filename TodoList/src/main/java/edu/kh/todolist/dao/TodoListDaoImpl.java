@@ -62,6 +62,8 @@ public class TodoListDaoImpl implements TodoListDao {
 		
 		Map<String, Object> resultMap = new HashMap<>();
 		
+		int completeCount = 0;
+		
 		
 		try {
 			
@@ -72,19 +74,29 @@ public class TodoListDaoImpl implements TodoListDao {
 			rs = pstmt.executeQuery();
 					
 			while(rs.next()) {
+				int workNo = rs.getInt("LIST_NO");
 				String title  = rs.getString("LIST_TITLE");
 				String detail  = rs.getString("LIST_DETAIL");
 				boolean complete  = rs.getBoolean("LIST_COMPLETE");
 				String enrollDate  = rs.getString("ENROLL_DATE");
 				
 			
-				Todo user = new Todo(title, detail, complete, enrollDate);
+				Todo user = new Todo(workNo, title, detail, complete, enrollDate);
 					
 				list.add(user);
-				
 			}
 			
+			for(Todo todo : list) {
+				if(todo.isComplete()) {
+					completeCount++;
+				}
+			}
+			
+			
 			 resultMap.put("todoList", list);
+			 resultMap.put("completeCount", completeCount);
+			 
+			 System.out.println(list);
 			
 			
 		} finally {
@@ -97,5 +109,69 @@ public class TodoListDaoImpl implements TodoListDao {
 		
 		return resultMap;
 	}
+	
+	
+	
+	
+	
+	@Override
+	public int todoAdd(Connection conn, String title, String detail) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("todoAdd");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, detail);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	@Override
+	public Todo todoDetailView(Connection conn, int index) throws SQLException {
+		
+		Todo todo = null;
+		
+		try {
+			
+			String sql = prop.getProperty("todoDetailView");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+					
+			if(rs.next()) {
+				int workNo = rs.getInt("LIST_NO");
+				String title  = rs.getString("LIST_TITLE");
+				String detail  = rs.getString("LIST_DETAIL");
+				boolean complete  = rs.getBoolean("LIST_COMPLETE");
+				String enrollDate  = rs.getString("ENROLL_DATE");
+			
+				Todo user = new Todo(workNo, title, detail, complete, enrollDate);
+			}
+			
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return todo;
+	}
+	
+	
 	
 }

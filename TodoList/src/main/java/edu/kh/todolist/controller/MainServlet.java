@@ -28,12 +28,10 @@ public class MainServlet extends HttpServlet{
 			
 			List<Todo> todoList = (List<Todo>)map.get("todoList");		
 			
-//			int completeCount = (int)map.get("completeCount");
+			int completeCount = (int)map.get("completeCount");
 			
 			req.setAttribute("todoList",todoList);
-//			req.setAttribute("completeCount",completeCount);
-			
-			System.out.println(todoList);
+			req.setAttribute("completeCount",completeCount);
 			
 			
 			String path = "/WEB-INF/views/main.jsp";

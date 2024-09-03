@@ -16,6 +16,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Todo implements Serializable{
 	// 							직렬화
+	
+	private int workNo;
 	private String title;
 	private String detail;
 	private boolean complete;

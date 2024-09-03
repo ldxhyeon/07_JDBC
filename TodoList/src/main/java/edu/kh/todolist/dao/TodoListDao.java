@@ -11,5 +11,10 @@ import edu.kh.todolist.dto.Todo;
 public interface TodoListDao {
 
 	Map<String, Object> todoListFullView(Connection conn) throws SQLException;
+
+	int todoAdd(Connection conn, String title, String detail) throws SQLException;
+
+	Todo todoDetailView(Connection conn, int index) throws SQLException;
+	
 	
 }

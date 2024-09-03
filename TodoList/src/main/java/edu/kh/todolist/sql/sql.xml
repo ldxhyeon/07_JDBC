@@ -10,6 +10,27 @@
 	 <!-- 사용자 등록 -->
 	 <entry key="selectAll">
 		SELECT 
+			LIST_NO,
+			LIST_TITLE,
+			LIST_DETAIL,
+			LIST_COMPLETE,
+			TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') 
+				ENROLL_DATE
+		FROM
+			 TD_LIST
+	 </entry>
+	 
+	 
+	<entry key="todoAdd">
+		INSERT INTO 
+			TD_LIST
+		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, 'Y', DEFAULT)
+	</entry>
+	
+	
+	 <entry key="todoDetailView">
+		SELECT 
+			LIST_NO,
 			LIST_TITLE,
 			LIST_DETAIL,
 			LIST_COMPLETE,

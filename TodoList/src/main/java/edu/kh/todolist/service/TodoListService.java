@@ -12,5 +12,9 @@ public interface TodoListService {
 
 	Map<String, Object> todoListFullView() throws SQLException;
 
+	int todoAdd(String title, String detail) throws SQLException;
+
+	Todo todoDetailView(int index) throws SQLException;
+
 	
 }

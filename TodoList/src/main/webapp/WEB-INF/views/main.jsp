@@ -18,7 +18,7 @@
 
   <%-- 길이 구하는 JSTML 함수 --%>
   <h3>전체 Todo 개수 : ${fn:length(todoList)} / 
-      <%-- 완료된 Todo 개수 : ${completeCount}</h3> --%>
+      완료된 Todo 개수 : ${completeCount}</h3>
 
   <hr>
 
