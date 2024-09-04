@@ -1,6 +1,5 @@
 package edu.kh.todolist.dao;
 
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
@@ -15,6 +14,12 @@ public interface TodoListDao {
 	int todoAdd(Connection conn, String title, String detail) throws SQLException;
 
 	Todo todoDetailView(Connection conn, int index) throws SQLException;
+
+	int todoComplete(Connection conn, int workNo) throws SQLException;
+
+	int todoUpdate(Connection conn, int workNo, String title, String detail) throws SQLException;
+
+	int todoDelete(Connection conn, int workNo) throws SQLException;
 	
 	
 }

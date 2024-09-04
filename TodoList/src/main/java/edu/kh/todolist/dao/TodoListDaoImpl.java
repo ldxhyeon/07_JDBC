@@ -175,5 +175,81 @@ public class TodoListDaoImpl implements TodoListDao {
 	}
 	
 	
+	@Override
+	public int todoComplete(Connection conn, int workNo) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("todoComplete");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, workNo);
+			
+			result = pstmt.executeUpdate();
+					
+			
+			
+		} finally {
+			close(pstmt);
+		}
+
+
+		return result;
+	}
+	
+	
+	
+	@Override
+	public int todoUpdate(Connection conn, int workNo, String title, String detail) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("todoUpdate");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, detail);
+			pstmt.setInt(3, workNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	@Override
+	public int todoDelete(Connection conn, int workNo) throws SQLException {
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("todoDelete");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, workNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	
 }

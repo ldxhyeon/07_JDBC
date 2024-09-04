@@ -14,8 +14,7 @@
 			LIST_TITLE,
 			LIST_DETAIL,
 			LIST_COMPLETE,
-			TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') 
-				ENROLL_DATE
+			TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD HH24:MI:SS') ENROLL_DATE
 		FROM
 			 TD_LIST
 	 </entry>
@@ -24,7 +23,7 @@
 	<entry key="todoAdd">
 		INSERT INTO 
 			TD_LIST
-		VALUES(SEQ_LIST_NO.NEXTVAL, ?, ?, 'Y', DEFAULT)
+		VALUES(SEQ_LIST_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT)
 	</entry>
 	
 	
@@ -34,13 +33,50 @@
 			LIST_TITLE,
 			LIST_DETAIL,
 			LIST_COMPLETE,
-			TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') 
-				ENROLL_DATE
+			TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD HH24:MI:SS') ENROLL_DATE  
 		FROM
 			 TD_LIST
 		WHERE
 			LIST_NO = ?
 	 </entry>
+	 
+	 
+	 
+ 	 <entry key="todoComplete">
+		UPDATE 
+			TD_LIST
+		SET
+			 LIST_COMPLETE = 
+				DECODE(LIST_COMPLETE, 0, 1, 0)
+		WHERE
+			LIST_NO = ?
+ 	</entry>
+ 	
+ 	
+ 	
+	 
+  <entry key="todoUpdate">
+		UPDATE 
+			TD_LIST
+		SET
+			LIST_TITLE = ?,
+			LIST_DETAIL = ?
+		WHERE
+			LIST_NO = ?
+ 	</entry>
+ 	
+ 	
+ 	
+ 	<entry key="todoDelete">
+		DELETE 
+		FROM
+			TD_LIST
+		WHERE
+			LIST_NO = ?
+ 	</entry>
+ 	
+ 	
+	 
 	 
 	 
 	 

@@ -5,7 +5,7 @@ const params = new URLSearchParams(location.search);
 
 // 쿼리스트링 중 key가 "index"인 파라미터의 값 얻어오기
 // -> 할 일 완료 여부 변경, 수정, 삭제 시 사용
-const index = params.get("index");
+const workNo = params.get("workNo");
 
 
 
@@ -23,7 +23,7 @@ completeBtn.addEventListener("click", () => {
 
   // 현재 보고있는 Todo 완료 여부를
   // (true)O -> X(false) 변경 요청
-  location.href = "/todo/complete?index=" + index;
+  location.href = "/todo/complete?workNo="+workNo;
 });
 
 // 삭제 버튼 클릭 시
@@ -38,7 +38,7 @@ deleteBtn.addEventListener("click", () => {
   // 2. confirm() 확인 클릭 시 
   //    /todo/delete?index=인덱스번호 GET 방식 요청 보내기
 
-  location.href = "/todo/delete?index=" + index;
+  location.href = "/todo/delete?workNo="+workNo;
 });
 
 
@@ -49,7 +49,7 @@ const updateBtn = document.querySelector("#updateBtn");
 updateBtn.addEventListener("click", () => {
 
   // GET 방식 요청
-  location.href = "/todo/update?index=" + index;
+  location.href = "/todo/update?workNo=" + workNo;
 });
 
 
