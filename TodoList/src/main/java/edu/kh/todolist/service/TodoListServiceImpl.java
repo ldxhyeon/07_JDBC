@@ -28,8 +28,6 @@ public class TodoListServiceImpl implements TodoListService{
 		
 		Map<String, Object> map = dao.todoListFullView(conn);	
 		
-		List<Todo> todoList = (List<Todo>)map.get("todoList");
-		
 		close(conn);
 		
 		return map;
