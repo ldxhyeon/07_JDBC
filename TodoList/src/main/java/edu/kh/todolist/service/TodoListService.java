@@ -16,5 +16,12 @@ public interface TodoListService {
 
 	Todo todoDetailView(int index) throws SQLException;
 
+	int todoComplete(int workNo) throws SQLException;
+
+	int todoUpdate(int workNo, String title, String detail) throws SQLException;
+
+	int todoDelete(int workNo) throws SQLException;
+	
+
 	
 }

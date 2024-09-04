@@ -27,7 +27,7 @@
       <button>수정</button>
 
       <%-- 숨겨져있는 input --%>
-      <input type="hidden" name="index" value="${param.index}">
+      <input type="hidden" name="workNo" value="${param.workNo}">
     </form>
 
     <c:if test="${not empty sessionScope.message}" >

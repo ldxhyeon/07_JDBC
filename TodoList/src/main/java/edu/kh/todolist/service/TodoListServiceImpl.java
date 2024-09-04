@@ -1,5 +1,7 @@
 package edu.kh.todolist.service;
 
+import static edu.kh.todolist.common.JDBCTemplate.*;
+
 import static edu.kh.todolist.common.JDBCTemplate.close;
 import static edu.kh.todolist.common.JDBCTemplate.getConnection;
 
@@ -25,8 +27,6 @@ public class TodoListServiceImpl implements TodoListService{
 		Connection conn = getConnection();
 		
 		Map<String, Object> map = dao.todoListFullView(conn);	
-		
-		List<Todo> todoList = (List<Todo>)map.get("todoList");
 		
 		close(conn);
 		
@@ -58,5 +58,54 @@ public class TodoListServiceImpl implements TodoListService{
 		
 		return todo;
 	}
+	
+	
+	@Override
+	public int todoComplete(int workNo) throws SQLException {
+		Connection conn = getConnection();
+		
+		int result = dao.todoComplete(conn, workNo);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	@Override
+	public int todoUpdate(int workNo, String title, String detail) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.todoUpdate(conn, workNo, title, detail);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	
+	@Override
+	public int todoDelete(int workNo) throws SQLException {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.todoDelete(conn, workNo);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	
 	
 }

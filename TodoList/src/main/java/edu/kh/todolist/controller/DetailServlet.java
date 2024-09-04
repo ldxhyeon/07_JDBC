@@ -26,7 +26,8 @@ public class DetailServlet extends HttpServlet{
 		
 		try {
 			// 전달 받은 파라미터 얻어오기
-			int index = Integer.parseInt(req.getParameter("index"));
+			int index = Integer.parseInt(req.getParameter("workNo"));
+			
 			
 			// 상세 조회 서비스 호출 후 결과 반환 받기
 			TodoListService service = new TodoListServiceImpl();
